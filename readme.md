@@ -4,7 +4,9 @@ Developing backend for:
 
 [Dwalesska.com](http://dwalesska.azurewebsites.net/)
 
+## Nov 9, 2021
 
+<p>Implementing the SendGrid service.</p>
 
 ## Nov 5, 2021
 
