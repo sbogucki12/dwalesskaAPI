@@ -4,6 +4,16 @@ Developing backend for:
 
 [Dwalesska.com](http://dwalesska.azurewebsites.net/)
 
+## Nov 10, 2021
+
+<p>Implementing the SendGrid service.</p>
+
+<ul>
+<li><img src="https://github.com/sbogucki12/dwalesskaAPI/blob/main/readmeFiles/sendGridPostman0.jpg" /></li>
+<li><img src="https://github.com/sbogucki12/dwalesskaAPI/blob/main/readmeFiles/sendGrid0.jpg" /></li>
+<li><img src="https://github.com/sbogucki12/dwalesskaAPI/blob/main/readmeFiles/sendGridEmail0.jpg" /></li>
+</ul>
+
 ## Nov 9, 2021
 
 <p>Implementing the SendGrid service.</p>

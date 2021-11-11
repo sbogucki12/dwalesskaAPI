@@ -36,9 +36,11 @@ namespace dwalesskaAPI
             //Replace in Prod with Azure Vault Storage
             //Injects the RecaptchaKey from User Secrets
             string RecaptchaKey = Configuration["RecaptchaKey"];
-            string SendGridAPI = Configuration["SendGridAPI"];
+            //string SendGridAPI = Configuration["SendGridAPI"];
+            //string SendGridEmail = Configuration["SendGridEmail"];
             services.AddSingleton<string>(RecaptchaKey);
-            services.AddSingleton<string>(SendGridAPI);
+            //services.AddSingleton<string>(SendGridAPI);
+            //services.AddSingleton<string>(SendGridEmail);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

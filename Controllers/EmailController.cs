@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using dwalesskaAPI.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 using System;
@@ -14,28 +16,28 @@ namespace dwalesskaAPI.Controllers
     [ApiController]
     public class EmailController : ControllerBase
     {
-        private readonly string _SendGridAPI;
-        public EmailController(string SendGridAPI)
+
+        private readonly IConfiguration _configuration; 
+
+        public EmailController(IConfiguration Configuration)
         {
-            _SendGridAPI = SendGridAPI;
+            _configuration = Configuration;            
         }
         // GET: api/<EmailController>
         [HttpGet]
-        public async Task<Response> Get()
+        public async Task<Response> Get([FromBody] Email email)
         {
 
-            //GO HERE: https://ilessrg.medium.com/send-emails-using-sendgrid-with-azure-in-net-core-6282c61b4041
-            //Start at SendEmailService.cs
-
-            string sendGridAPI = _SendGridAPI;  
+            
+            string sendGridAPI = _configuration["SendGridAPI"];
+            string sendGridEmail = _configuration["SendGridEmail"];
 
             var client = new SendGridClient(sendGridAPI);
-            var from = new EmailAddress("test@example.com", "Example User");
-            var subject = "Sending with SendGrid is Fun";
-            var to = new EmailAddress("sbogucki@mail.usf.edu", "Example User");
-            var plainTextContent = "and easy to do anywhere, even with C#";
-            var htmlContent = "<strong>and easy to do anywhere, even with C#</strong>";
-            var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+            var from = new EmailAddress(sendGridEmail, email.VisitorName);
+            var subject = "[From website.com] " + email.VisitorComment.Substring(0,20) + "...";
+            var to = new EmailAddress(sendGridEmail, "Recipient");
+            var content = email.VisitorComment + " \n " + "From: " + email.VisitorEmail; 
+            var msg = MailHelper.CreateSingleEmail(from, to, subject, content, null);
             var response = await client.SendEmailAsync(msg);
 
             return response; 
