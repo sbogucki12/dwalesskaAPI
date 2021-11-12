@@ -4,6 +4,12 @@ Developing backend for:
 
 [Dwalesska.com](http://dwalesska.azurewebsites.net/)
 
+## Nov 11. 2021
+
+<p>Invoking this repo's SendGrid client via a Fetch POST request from my React app (in another repo):</p>
+
+<img src="https://github.com/sbogucki12/dwalesskaAPI/blob/main/readmeFiles/commentForm0GIF.gif" />
+
 ## Nov 10, 2021
 
 <p>Implementing the SendGrid service.</p>
