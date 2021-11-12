@@ -23,19 +23,25 @@ namespace dwalesskaAPI.Controllers
         {
             _configuration = Configuration;            
         }
-        // GET: api/<EmailController>
-        [HttpGet]
-        public async Task<Response> Get([FromBody] Email email)
+        // POST: api/<EmailController>
+        [HttpPost]
+        public async Task<Response> Post([FromBody] Email email)
         {
 
-            
+            //TODO: Add time stamp
+            //TODO: Deploy - changed from GET to POST
+            //TODO: Build client API call
             string sendGridAPI = _configuration["SendGridAPI"];
             string sendGridEmail = _configuration["SendGridEmail"];
-
+            string visitorSubject = email.VisitorComment;
+            if(email.VisitorComment.Length > 19)
+            {
+                visitorSubject = visitorSubject.Substring(0, 20);
+            }
             var client = new SendGridClient(sendGridAPI);
             var from = new EmailAddress(sendGridEmail, email.VisitorName);
-            var subject = "[From website.com] " + email.VisitorComment.Substring(0,20) + "...";
-            var to = new EmailAddress(sendGridEmail, "Recipient");
+            var subject = "[From Dwalesska.com] " + visitorSubject + "...";
+            var to = new EmailAddress(sendGridEmail, "Dania Walesska");
             var content = email.VisitorComment + " \n " + "From: " + email.VisitorEmail; 
             var msg = MailHelper.CreateSingleEmail(from, to, subject, content, null);
             var response = await client.SendEmailAsync(msg);
@@ -51,10 +57,10 @@ namespace dwalesskaAPI.Controllers
         }
 
         // POST api/<EmailController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
+        //[HttpPost]
+        //public void Post([FromBody] string value)
+        //{
+        //}
 
         // PUT api/<EmailController>/5
         [HttpPut("{id}")]
